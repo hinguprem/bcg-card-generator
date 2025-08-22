@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Base & Typography --- */
+body {
+  @apply bg-gray-900 text-gray-200 font-sans antialiased;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Apply the special display font only to main headings or specific elements */
+.font-display {
+  font-family: 'Cinzel', serif;
+}
+
+
+/* --- Form Elements --- */
+.form-wrapper {
+  @apply max-w-2xl mx-auto mt-8 px-4;
+}
+
+input[type="text"] {
+  @apply w-full bg-gray-800 text-gray-200 placeholder-gray-500;
+  @apply border border-gray-600 rounded-md shadow-sm;
+  @apply py-2 px-4 text-base;
+  @apply transition-all duration-200 ease-in-out;
+  @apply focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none;
+}
+
+
+/* --- Buttons --- */
+.btn {
+  @apply w-full py-3 px-5 rounded-md font-semibold text-center;
+  @apply transition-all duration-200 ease-in-out;
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-primary {
+  @apply btn bg-indigo-600 text-white shadow-lg;
+  @apply hover:bg-indigo-700;
+  @apply focus:ring-indigo-500;
+}
+
+.btn-secondary {
+  @apply btn bg-gray-700 text-gray-200;
+  @apply border border-gray-600;
+  @apply hover:bg-gray-600;
+  @apply focus:ring-indigo-500;
+}
+
+
+/* --- Link Styles --- */
+a {
+  @apply text-indigo-400 hover:text-indigo-300 hover:underline;
+}
+
+/* --- Card Preview --- */
+.card-preview-wrapper {
+  @apply flex justify-center py-10;
+}
+
+/* --- Template Switcher --- */
+.template-switcher {
+  @apply max-w-lg mx-auto px-4 flex justify-between items-center text-gray-400;
+}
+
+.template-switcher button {
+  @apply px-4 py-2 rounded-md hover:bg-gray-800 hover:text-white transition-colors;
+}
