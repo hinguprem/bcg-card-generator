@@ -153,7 +153,7 @@ function App() {
           </button>
 
           <p className="text-center text-sm w-full text-gray-400 font-display pt-4">
-            Made by <a href="https://t4p4n.github.io">Hingu Prem</a>
+            Made by <a href="https://github.com/hinguprem">Hingu Prem</a>
           </p>
         </div>
       </div>
