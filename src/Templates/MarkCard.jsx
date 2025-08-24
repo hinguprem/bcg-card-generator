@@ -38,7 +38,7 @@ const MarkCard = forwardRef((props, ref) => {
         <h1 className="text-4xl font-bold tracking-wide">{title}</h1>
         <p className="text-lg opacity-90">{description}</p>
         <div className="mt-3 text-xs opacity-70 border-t border-white/20 pt-2">
-          <p> {phone} <span className="mx-16">  </span> ✉ {email}</p>
+          <p> {phone} <span className="mx-14">  </span> ✉ {email}</p>
           <p>{addresss}</p>
         </div>
       </div>
