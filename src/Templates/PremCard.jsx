@@ -1,32 +1,52 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from 'react';
 
-const PremCard = forwardRef(
-  ({ title, description, addresss, phone, brandName, brandline, gradient, fontColor }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={`w-[390px] h-[220px] rounded-xl shadow-lg flex flex-col justify-between p-5 ${gradient}`}
-        style={{ color: fontColor }}
-      >
-        <div id="card" className="p-6 rounded-2xl shadow-lg w-96">
-  {/* कार्ड का content */}
-</div>
+const PremCard = forwardRef((props, ref) => {
+  const {
+    title,
+    description,
+    addresss,
+    phone,
+    email,
+    logo,
+    brandName,
+    brandline,
+    gradient,
+    fontColor,
+    fontClass,
+  } = props;
 
-        <div>
-          <h1 className="text-2xl font-bold">{title}</h1>
-          <p className="text-sm">{description}</p>
+  return (
+    <div
+      ref={ref}
+      className={`w-[450px] h-[250px] p-6 rounded-lg shadow-lg flex flex-col justify-between ${gradient} ${fontClass}`}
+      style={{ color: fontColor }}
+    >
+      <div>
+        <div className="flex justify-between items-start">
+          <div>
+            <h1 className="text-3xl font-bold">{title}</h1>
+            <p className="text-md">{description}</p>
+          </div>
+          {logo && (
+            <img
+              src={logo}
+              alt="Logo"
+              className="w-16 h-16 object-cover rounded-full border border-black/90" // Changed to object-cover
+            />
+          )}
         </div>
-        <div>
-          <p className="text-xs">{addresss}</p>
-          <p className="text-xs">{phone}</p>
-        </div>
-        <div className="text-right">
-          <h2 className="font-semibold">{brandName}</h2>
-          <p className="text-xs italic">{brandline}</p>
+        <div className="mt-4 text-sm">
+          <p>{addresss}</p>
+          <p>{phone}</p>
+          <p>{email}</p>
         </div>
       </div>
-    );
-  }
-);
+      <div className="text-right">
+        <h2 className="text-xl font-semibold">{brandName}</h2>
+        <p className="text-sm italic">{brandline}</p>
+      </div>
+    </div>
+  );
+});
 
 export default PremCard;

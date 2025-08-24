@@ -6,15 +6,17 @@ import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 
 function App() {
-  // State remains the same...
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [addresss, setAddresss] = useState("");
-  const [phone, setPhone] = useState("");
-  const [brandName, setBrandName] = useState("");
-  const [brandline, setBrandline] = useState("");
+  const [title, setTitle] = useState("Hingu Prem");
+  const [description, setDescription] = useState("Software Developer");
+  const [addresss, setAddresss] = useState("Ahmedabad, Gujarat, India");
+  const [phone, setPhone] = useState("+91 98765 43210");
+  const [email, setEmail] = useState("prem.hingu@example.com");
+  const [logo, setLogo] = useState(null);
+  const [brandName, setBrandName] = useState("Prem Works");
+  const [brandline, setBrandline] = useState("Building Ideas into Reality");
   const [gradient, setGradient] = useState("bg-gradient-to-r from-indigo-800 via-purple-800 to-pink-800");
   const [fontColor, setFontColor] = useState("#ffffff");
+  const [fontClass, setFontClass] = useState('font-cinzel'); // Font state
   const exportRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const [fontPickerOpen, setFontPickerOpen] = useState(false);
@@ -22,6 +24,13 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [themeName, setThemeName] = useState(themeNames[0]);
   const Template = memo(lazy(() => import(`./Templates/${themeName}.jsx`)));
+
+  const handleLogoUpload = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setLogo(URL.createObjectURL(file));
+    }
+  };
 
   return (
     <>
@@ -36,16 +45,12 @@ function App() {
           <GradientPicker setGradient={setGradient} />
         </div>
         <div className="mt-2 flex justify-end">
-          <button
-            className="btn-secondary w-auto" // Using new class
-            onClick={() => setIsOpen(false)}
-          >
+          <button className="btn-secondary w-auto" onClick={() => setIsOpen(false)}>
             Close
           </button>
         </div>
       </Rodal>
 
-      {/* Using new wrapper class from CSS */}
       <div className="card-preview-wrapper">
         <Suspense fallback={<LoaderSkeleton />}>
           <Template
@@ -53,16 +58,18 @@ function App() {
             description={description}
             addresss={addresss}
             phone={phone}
+            email={email}
+            logo={logo}
             brandName={brandName}
             brandline={brandline}
             gradient={gradient}
             fontColor={fontColor}
+            fontClass={fontClass}
             ref={exportRef}
           />
         </Suspense>
       </div>
 
-      {/* Using new wrapper class from CSS */}
       <div className="template-switcher">
         <button
           onClick={() => {
@@ -88,16 +95,27 @@ function App() {
         </button>
       </div>
 
-      {/* Form using new wrapper and element styles from CSS */}
       <div className="form-wrapper">
         <div className="flex flex-col items-start justify-center gap-4 w-full">
-          {/* Inputs no longer need classes; they are styled globally */}
           <input type="text" placeholder="Name" value={title} onChange={(e) => setTitle(e.target.value)} />
           <input type="text" placeholder="Designation" value={description} onChange={(e) => setDescription(e.target.value)} />
+          <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
           <input type="text" placeholder="Address" value={addresss} onChange={(e) => setAddresss(e.target.value)} />
           <input type="text" placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
           <input type="text" placeholder="Company" value={brandName} onChange={(e) => setBrandName(e.target.value)} />
           <input type="text" placeholder="Tag Line" value={brandline} onChange={(e) => setBrandline(e.target.value)} />
+
+          <select
+            value={fontClass}
+            onChange={(e) => setFontClass(e.target.value)}
+            className="form-input"
+          >
+            <option value="font-cinzel">Cinzel (Classic)</option>
+            <option value="font-inter">Inter (Modern)</option>
+            <option value="font-lato">Lato (Friendly)</option>
+            <option value="font-merriweather">Merriweather (Serif)</option>
+            <option value="font-playfair">Playfair Display (Elegant)</option>
+          </select>
 
           <div className="flex flex-row items-center w-full justify-between gap-2">
             <button className="btn-secondary" onClick={() => setIsOpen(true)}>
@@ -119,12 +137,23 @@ function App() {
             ) : null}
           </div>
 
+          <label htmlFor="logo-upload" className="btn-secondary cursor-pointer">
+            Upload Logo
+          </label>
+          <input
+            id="logo-upload"
+            type="file"
+            accept="image/png, image/jpeg"
+            className="hidden"
+            onChange={handleLogoUpload}
+          />
+
           <button onClick={() => saveCardAsImage(exportRef)} className="btn-primary">
             Export as Image
           </button>
 
           <p className="text-center text-sm w-full text-gray-400 font-display pt-4">
-            Made by <a href="https://github.com/hinguprem">Hingu Prem</a>
+            Made by <a href="https://t4p4n.github.io">Hingu Prem</a>
           </p>
         </div>
       </div>

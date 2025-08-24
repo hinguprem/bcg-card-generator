@@ -1,26 +1,49 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from 'react';
 
-const MarkCard = forwardRef(
-  ({ title, description, addresss, phone, brandName, brandline, gradient, fontColor }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={`w-[390px] h-[220px] rounded-2xl shadow-xl p-6 flex flex-col justify-center items-center text-center ${gradient}`}
-        style={{ color: fontColor }}
-      >
-        <h1 className="text-3xl font-extrabold">{title}</h1>
-        <p className="text-base">{description}</p>
-        <div className="mt-4">
-          <p className="text-sm">{addresss}</p>
-          <p className="text-sm">{phone}</p>
+const MarkCard = forwardRef((props, ref) => {
+  const {
+    title,
+    description,
+    addresss,
+    phone,
+    email,
+    logo,
+    brandName,
+    brandline,
+    gradient,
+    fontColor,
+    fontClass,
+  } = props;
+
+  return (
+    <div
+      ref={ref}
+      className={`w-[450px] h-[250px] p-8 rounded-xl shadow-2xl flex flex-col justify-between ${gradient} ${fontClass}`}
+      style={{ color: fontColor }}
+    >
+      <div className="flex justify-between items-start">
+        <div className="text-left">
+          <h2 className="text-2xl font-bold">{brandName}</h2>
+          <p className="text-sm italic opacity-80">{brandline}</p>
         </div>
-        <div className="mt-4">
-          <h2 className="font-semibold">{brandName}</h2>
-          <p className="text-xs italic">{brandline}</p>
+        {logo && (
+          <img
+            src={logo}
+            alt="Logo"
+            className="w-16 h-16 object-cover rounded-full border border-black/90" // Changed to object-cover
+          />
+        )}
+      </div>
+      <div className="text-left">
+        <h1 className="text-4xl font-bold tracking-wide">{title}</h1>
+        <p className="text-lg opacity-90">{description}</p>
+        <div className="mt-3 text-xs opacity-70 border-t border-white/20 pt-2">
+          <p> {phone} <span className="mx-16">  </span> ✉ {email}</p>
+          <p>{addresss}</p>
         </div>
       </div>
-    );
-  }
-);
+    </div>
+  );
+});
 
 export default MarkCard;
